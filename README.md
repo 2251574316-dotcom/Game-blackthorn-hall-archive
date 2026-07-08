@@ -1,3 +1,51 @@
-# Game-blackthorn-hall-archive
-一个简单的网页解密游戏，不是很恐怖//An interactive retro web mystery set inside the reconstructed official archive of a post-war British psychiatric hospital, uncovering the story of Elisa, Leah, and a hidden history of psychosurgery.//
-目前的版本是0708的测试版，部分内容不是很全面，有单独对剧情感兴趣的可以Email我
+# Blackthorn Hall Hospital Archive
+
+一个纯静态的网页解谜原型，形式是“精神病院官方档案站 + 内部馆藏入侵”。
+
+## 怎么打开
+
+直接在浏览器里打开 [index.html](/Users/fengxilei/Documents/New%20project/corridor-217/index.html) 就能玩。
+
+## 怎么发给别人
+
+这是纯静态网页，不需要后端。现在目录里已经补了静态托管配置，可以直接发到这些平台：
+
+- `Netlify Drop`
+  把整个 `corridor-217` 文件夹拖到 Netlify 的上传页面，几秒钟就会得到一个公网链接。
+
+- `Vercel`
+  新建项目后直接导入这个目录，平台会自动识别为静态站点并生成链接。
+
+- `GitHub Pages`
+  仓库里已经补了自动发布工作流 [github-pages.yml](/Users/fengxilei/Documents/New%20project/.github/workflows/github-pages.yml)。
+  你把整个仓库推到 GitHub 后，在仓库设置里开启 `Pages`，来源选 `GitHub Actions` 就可以。
+  之后每次更新 `corridor-217` 并推送到 `main`，都会自动刷新链接。
+
+如果你只想要最快的方式，优先用 `Netlify Drop`。
+
+## GitHub Pages 链接格式
+
+如果这是个人仓库，通常会变成：
+
+`https://你的用户名.github.io/你的仓库名/`
+
+因为这份工作流直接发布的是 `corridor-217` 目录内容，所以链接打开后就是游戏首页，不需要再手动补子路径。
+
+## 当前内容
+
+- 伪官方网站式首页，围绕一战后至 1958 年停运的英国精神病院展开
+- 主控身份是脑神经研究专家 Dr. Lydia Mercer
+- 医院设施文章库与医护人员档案页，包含霍华德与珍妮
+- 四类治疗报道档案：日常看护、治疗手段、手术相关、医学成就
+- 每类 6 篇以上文章，且多篇艾丽莎相关报道带有正向版 / 改写版双版本
+- 两幕结构：先解封档案，再追查被实时改写的报道页面
+- 3 段核心谜题：平民开放年份、治疗升级顺序、前额叶索引词
+- 后半段包含未署名留言、日期检索、艾丽莎/莉娜双版本报道拼接
+- 研究笔记、已取权限、会话记录三个信息面板
+- 轻恐怖结尾，主题聚焦前额叶切除手术档案
+
+## 适合继续扩展的方向
+
+- 把每个栏目继续做深，扩展成完整的档案树和多页面站点
+- 增加病历扫描件、录音转写、旧报纸版式等拟真材料
+- 加入多结局，比如公开真相、被档案反向吸纳、伪造结论等分支

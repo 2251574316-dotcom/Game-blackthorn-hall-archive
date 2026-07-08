@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blackthorn Hall Hospital Archive</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="paper-noise" aria-hidden="true"></div>
+    <div class="app-shell">
+      <section class="intro-screen" id="intro-screen">
+        <p class="eyebrow">Official Archive Reconstruction</p>
+        <h1>Blackthorn Hall Hospital</h1>
+        <p class="intro-copy">
+          这是一份被重新拼接出来的医院官方档案站。Blackthorn Hall 曾建于一战后的英国北部，
+          起初只收治战后精神受损军人，二战期间扩建，1947 年后转而接收普通民众。
+        </p>
+        <p class="intro-copy">
+          医院在 1958 年停运，官方原因从未公开。媒体长期怀疑，这与院内越发激进的
+          <span>prefrontal leucotomy / lobotomy</span> 相关治疗项目及其引发的人道主义批评有关。
+        </p>
+        <p class="intro-copy">
+          你将以脑神经研究专家 <span>Dr. Lydia Mercer</span> 的身份进入档案，调查这家医院与前额叶切除手术有关的封存记录。
+        </p>
+        <div class="intro-actions">
+          <button class="primary-button" id="start-button">进入医院档案站</button>
+          <p class="micro-note">单页静态网页，直接打开即可游玩。</p>
+        </div>
+      </section>
+
+      <main class="game-shell hidden" id="game-shell">
+        <header class="topbar">
+          <div class="title-stack">
+            <p class="eyebrow">Blackthorn Hall Hospital Official Archive</p>
+            <div class="portal-brand-row">
+              <div class="portal-logo-box">
+                <h2>Blackthorn Hall</h2>
+                <p class="portal-domain">ARCHIVE.NET</p>
+              </div>
+              <div class="portal-brand-copy">
+                <p class="lead-copy">
+                  战争创伤收治、平民开放与被删除的 Theatre B
+                </p>
+                <p class="portal-subcopy">
+                  建于 1919 年，扩张于二战时期，1958 年停运。官方网站的语气很平静，像在极力避开真正的原因。
+                </p>
+              </div>
+            </div>
+            <div class="portal-nav-row">
+              <span>首页</span>
+              <span>病区</span>
+              <span>医护</span>
+              <span>治疗</span>
+              <span>病例</span>
+              <span>外科</span>
+              <span>档案检索</span>
+              <span>帮助</span>
+            </div>
+            <div class="portal-notice-row">
+              <span class="portal-date-stamp">Archive 2000</span>
+              <span id="archive-status">页面层级: 公开介绍</span>
+              <span id="trace-status">系统反馈: 档案暂未注意到你</span>
+            </div>
+          </div>
+
+          <div class="status-panel">
+            <p class="status-label">调查目标</p>
+            <p class="objective-text" id="objective-text"></p>
+            <p class="investigator-note">
+              主控身份: Dr. Lydia Mercer · 研究方向: 脑前额叶切除术档案溯源
+            </p>
+            <div class="search-strip">
+              <input
+                class="archive-search-input"
+                id="archive-search-input"
+                type="text"
+                placeholder="检索日期或关键词：艾丽莎 / 霍华德 / 手术 / 1952-06-11"
+                aria-label="检索档案"
+              />
+              <button class="primary-button" id="archive-search-button">检索档案</button>
+            </div>
+            <p class="archive-search-hint" id="archive-search-hint">
+              可检索日期、人物、手术、病区和主线关键词。
+            </p>
+            <div class="toolbar">
+              <button class="ghost-button" id="hint-button">给我一点提示</button>
+              <button class="ghost-button" id="reset-button">重新开始</button>
+            </div>
+          </div>
+        </header>
+
+        <section class="content-grid">
+          <aside class="left-rail">
+            <section class="rail-section">
+              <button class="rail-section-button" data-target="medical-news">医学新闻</button>
+              <div class="rail-links">
+                <button class="rail-link-button" data-target="daily-care">儿童病房恢复纪要</button>
+                <button class="rail-link-button" data-target="methods">电流与休息疗法</button>
+                <button class="rail-link-button" data-target="surgery-archive">前额叶手术报道</button>
+                <button class="rail-link-button" data-target="achievements">成功案例宣传稿</button>
+              </div>
+            </section>
+
+            <section class="rail-section">
+              <button class="rail-section-button" data-target="psych-tests">心理测试</button>
+              <div class="rail-links">
+                <button class="rail-link-button" data-target="admissions">病人接收评估</button>
+                <button class="rail-link-button" data-target="treatment">情绪稳定量表</button>
+                <button class="rail-link-button" data-target="facilities">儿童观察寝室</button>
+                <button class="rail-link-button" data-target="staff">护理观察记录</button>
+              </div>
+            </section>
+
+            <section class="rail-section">
+              <button class="rail-section-button" data-target="history">历史</button>
+              <div class="rail-links">
+                <button class="rail-link-button" data-target="history">建院与扩建时间线</button>
+                <button class="rail-link-button" data-target="facilities">病区与附楼沿革</button>
+                <button class="rail-link-button" data-target="staff">医护人物档案</button>
+                <button class="rail-link-button" data-target="director">院长与理论来源</button>
+              </div>
+            </section>
+
+            <section class="rail-section">
+              <button class="rail-section-button" data-target="forum">论坛</button>
+              <div class="rail-links">
+                <button class="rail-link-button" data-target="exchange">未署名留言</button>
+                <button class="rail-link-button" data-target="revision">页面改写痕迹</button>
+                <button class="rail-link-button" data-target="search">日期检索讨论</button>
+                <button class="rail-link-button" data-target="dossier">艾丽莎档案串帖</button>
+              </div>
+            </section>
+          </aside>
+
+          <section class="main-column">
+            <section class="hero-card">
+              <div class="archive-gallery">
+                <figure class="archive-photo archive-photo-main">
+                  <img
+                    src="https://iiif.wellcomecollection.org/image/L0025623/full/900%2C/0/default.jpg"
+                    alt="历史医院病房照片"
+                    loading="lazy"
+                  />
+                  <figcaption>Ward Record · 病房监拍影像</figcaption>
+                </figure>
+
+                <div class="archive-photo-grid">
+                  <figure class="archive-photo archive-photo-small">
+                    <img
+                      src="https://wellcomeimages.org/indexplus/obf_images/79/ec/fe2c189365589fe6cff87266a950.jpg"
+                      alt="历史医院手术室照片"
+                      loading="lazy"
+                    />
+                    <figcaption>Theatre File · Dalston</figcaption>
+                  </figure>
+
+                  <figure class="archive-photo archive-photo-small">
+                    <img
+                      src="https://iiif.wellcomecollection.org/image/V0029847/full/900%2C/0/default.jpg"
+                      alt="历史医院手术人员照片"
+                      loading="lazy"
+                    />
+                    <figcaption>Staff Image · UCH</figcaption>
+                  </figure>
+
+                  <figure class="archive-photo archive-photo-small">
+                    <img
+                      src="https://iiif.wellcomecollection.org/image/L0002317/full/900%2C/0/default.jpg"
+                      alt="历史医院外景照片"
+                      loading="lazy"
+                    />
+                    <figcaption>Exterior View · Grounds</figcaption>
+                  </figure>
+
+                  <figure class="archive-photo archive-photo-small">
+                    <img
+                      src="https://iiif.wellcomecollection.org/image/L0029544/full/900%2C/0/default.jpg"
+                      alt="历史病房走廊照片"
+                      loading="lazy"
+                    />
+                    <figcaption>Corridor File · East Wing</figcaption>
+                  </figure>
+                </div>
+              </div>
+
+              <div class="hero-copy">
+                <p class="hero-summary">
+                  Blackthorn Hall Hospital for Nervous Disorders 最初由战后复健基金资助，
+                  以“恢复判断力与社会顺应性”为名运营。后期它对普通民众开放，
+                  也逐步把神经外科手段写进了“安抚性治疗”目录。
+                </p>
+
+                <div class="chip-row">
+                  <span class="year-chip">1919 · 退伍军人收治</span>
+                  <span class="year-chip">1940s · 二战扩建</span>
+                  <span class="year-chip">1947 · 平民开放</span>
+                  <span class="year-chip">1958 · 停运封存</span>
+                </div>
+
+                <div class="hero-link-grid">
+                  <button class="hero-link-button" data-target="history">医院沿革</button>
+                  <button class="hero-link-button" data-target="admissions">接收政策</button>
+                  <button class="hero-link-button" data-target="facilities">医院设施</button>
+                  <button class="hero-link-button" data-target="staff">医护人员</button>
+                  <button class="hero-link-button" data-target="theatre">Theatre B</button>
+                  <button class="hero-link-button" data-target="search">日期检索</button>
+                </div>
+              </div>
+            </section>
+
+            <section class="portal-grid">
+              <button class="portal-card" data-target="history">
+                <span class="portal-kicker">Public Page</span>
+                <strong>医院沿革</strong>
+                <p>战争时期设立、二战扩建与 1958 年停运时间线。</p>
+              </button>
+
+              <button class="portal-card" data-target="admissions">
+                <span class="portal-kicker">Admissions</span>
+                <strong>接收政策</strong>
+                <p>起初面向退伍军人，后续才向普通民众开放。</p>
+              </button>
+
+              <button class="portal-card" data-target="facilities">
+                <span class="portal-kicker">Facilities</span>
+                <strong>医院设施</strong>
+                <p>病房、花园、水疗室、Theatre B 与地下档案库的设施介绍。</p>
+              </button>
+
+              <button class="portal-card" data-target="staff">
+                <span class="portal-kicker">Staff</span>
+                <strong>医护人员</strong>
+                <p>霍华德、珍妮与其他核心医护的档案式人物介绍。</p>
+              </button>
+
+              <button class="portal-card" data-target="director">
+                <span class="portal-kicker">Faculty</span>
+                <strong>院长介绍</strong>
+                <p>脑神经研究专家 Hargreaves 教授与他的“安定理论”。</p>
+              </button>
+
+              <button class="portal-card" data-target="press">
+                <span class="portal-kicker">Media</span>
+                <strong>媒体报道</strong>
+                <p>人道主义批评、停运猜测与被删改的舆论摘录。</p>
+              </button>
+
+              <button class="portal-card" data-target="terminal">
+                <span class="portal-kicker">Archive</span>
+                <strong>馆藏终端</strong>
+                <p>需要输入正确年份，才能进入内部目录层。</p>
+              </button>
+
+              <button class="portal-card" data-target="treatment">
+                <span class="portal-kicker">Clinical Index</span>
+                <strong>治疗目录</strong>
+                <p>某些条目被删掉了，只剩升级顺序的残影。</p>
+              </button>
+
+              <button class="portal-card" data-target="daily-care">
+                <span class="portal-kicker">News Archive</span>
+                <strong>日常看护报道</strong>
+                <p>儿童病房、休息时段、看护程序与日常恢复故事。</p>
+              </button>
+
+              <button class="portal-card" data-target="methods">
+                <span class="portal-kicker">News Archive</span>
+                <strong>治疗手段报道</strong>
+                <p>观察疗法、电流疗法、胰岛素休息法与行为矫正项目。</p>
+              </button>
+
+              <button class="portal-card" data-target="surgery-archive">
+                <span class="portal-kicker">News Archive</span>
+                <strong>手术相关报道</strong>
+                <p>Theatre B、麻醉程序与前额叶手术报道的完整时间线。</p>
+              </button>
+
+              <button class="portal-card" data-target="achievements">
+                <span class="portal-kicker">News Archive</span>
+                <strong>医学成就报道</strong>
+                <p>捐助委员会、医学协会、媒体回访与成功案例宣传稿。</p>
+              </button>
+
+              <button class="portal-card" data-target="theatre">
+                <span class="portal-kicker">Restricted</span>
+                <strong>Theatre B 封存记录</strong>
+                <p>与前额叶切除术有关的最后一批手术档案。</p>
+              </button>
+
+              <button class="portal-card portal-card-late" data-target="revision">
+                <span class="portal-kicker">Diff</span>
+                <strong>页面改写痕迹</strong>
+                <p>你缓存过的报道与当前版本不再一致，像有人正从另一头改页。</p>
+              </button>
+
+              <button class="portal-card portal-card-late" data-target="exchange">
+                <span class="portal-kicker">Live Thread</span>
+                <strong>未署名留言</strong>
+                <p>你尝试追问修改原因，对方始终不回答，只留下日期。</p>
+              </button>
+
+              <button class="portal-card portal-card-late" data-target="search">
+                <span class="portal-kicker">Search Index</span>
+                <strong>日期报道检索</strong>
+                <p>把收到的日期输进去，查看当日被刊出的医院报道。</p>
+              </button>
+
+              <button class="portal-card portal-card-late" data-target="dossier">
+                <span class="portal-kicker">Composite File</span>
+                <strong>艾丽莎档案拼接</strong>
+                <p>当三个日期都被找回后，才能把官方故事和真实故事拼在一起。</p>
+              </button>
+            </section>
+          </section>
+
+          <aside class="sidebar">
+            <section class="panel">
+              <div class="panel-head">
+                <h3>已取权限</h3>
+                <span>Access</span>
+              </div>
+              <ul class="card-list" id="inventory-list"></ul>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <h3>研究笔记</h3>
+                <span>Notes</span>
+              </div>
+              <ul class="card-list" id="clue-list"></ul>
+            </section>
+
+            <section class="panel">
+              <div class="panel-head">
+                <h3>会话记录</h3>
+                <span>Log</span>
+              </div>
+              <ul class="log-list" id="log-list"></ul>
+            </section>
+
+            <section class="panel source-panel">
+              <div class="panel-head">
+                <h3>馆藏图像</h3>
+                <span>Sources</span>
+              </div>
+              <ul class="source-list">
+                <li>
+                  <a href="https://wellcomecollection.org/concepts/bj9yjd5s" target="_blank" rel="noreferrer">
+                    Wellcome Collection · 历史病房影像
+                  </a>
+                </li>
+                <li>
+                  <a href="https://commons.wikimedia.org/wiki/File:The_German_Hospital,_Dalston%3B_operating_theatre._Photograph_Wellcome_L0028124.jpg" target="_blank" rel="noreferrer">
+                    Wikimedia Commons / Wellcome · 德国医院手术室
+                  </a>
+                </li>
+                <li>
+                  <a href="https://commons.wikimedia.org/wiki/File:University_College_Hospital%3B_medical_staff_in_an_operating_t_Wellcome_V0029847.jpg" target="_blank" rel="noreferrer">
+                    Wikimedia Commons / Wellcome · 手术室医护影像
+                  </a>
+                </li>
+              </ul>
+            </section>
+          </aside>
+        </section>
+      </main>
+
+      <section class="ending-screen hidden" id="ending-screen">
+        <div class="ending-card" id="ending-card"></div>
+      </section>
+
+      <div class="modal-backdrop hidden" id="modal-backdrop">
+        <div
+          class="modal-card"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+        >
+          <div class="modal-head">
+            <h3 id="modal-title"></h3>
+            <button class="close-button" id="modal-close" aria-label="关闭弹窗">
+              ×
+            </button>
+          </div>
+          <div class="modal-body" id="modal-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="game.js"></script>
+  </body>
+</html>
